@@ -1,0 +1,43 @@
+﻿<html>
+<body>
+
+<h1>发邮件发微信功能接口</h1>
+<h2>描述</h2>
+<p>首先在mt5数据文件夹中MQL5文件夹下运行youjian.exe文件，填写是否（y/n）需要扫码登录微信以接受发送微信消息（登录微信相当于在网页端登录微信）</p>
+<P>在编写的EA文件中需要调用 写文件0708.mqh ,调用Weiyou类中函数</P>
+<P>需要发送的文件可以是绝对路径文件，也可以发相对路径文件(只需要上传发送的文件名)，但文件必须在MQL5文件夹下File目录下</P>
+<h2>发微信接口</h2>
+<p>  void 微信( string   getstring, //发送的文字</p>
+           <p> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     string    friends,//微信好友备注没有添昵称，多个接受人需要用英文逗号隔开</p>
+            <p>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   string    getfile=""//发送的文件没有不填);</p>
+<h3>注释</h3>
+<p>个别微信号出现LOG OUT！结果，是因为这个微信号存在微信网页端登录限制，解决方法：在手机微信界面打开设置，点击账号与安全，打开账号保护，点击账号保护关闭。
+
+再登录网页版登录后再打开账号保护。</p>
+<p>如果联系人输入错误，exe文件返回未找到的联系人名称，需要重新输入</p>
+<h2>发邮件接口</h2>
+<p>  void 邮箱( string   getstring, //发送的文字</p>
+           <p> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     string    friends,//需要接收信息的邮箱，多个邮箱需要用英文逗号隔开</p>
+            <p>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   string    getfile=""//发送的文件没有不填);</p>
+
+<h3>注释</h3>
+<p>如果邮箱人输入错误，exe文件返回邮箱发送失败，需要重新输入</p>
+<h3>例如</h3>
+<p>#property copyright "Copyright 2019, MetaQuotes Software Corp."</p>
+<p>#property link      "https://www.mql5.com" </p>
+<p>#property version   "1.00"</p>
+<p>#include<写文件0708.mqh>  //导入mqh文件</p>
+<p>input string friend;  //定义接受人</p>
+<p>input string youxiang;//定义接收邮箱</p>
+<p>int OnInit()</p>
+<p>  {</p>
+ <p>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbspstring 文字=Symbol();//需要发送的文字</p>
+ <p>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbspstring 文件名="test1.txt";//需要发送的文件，文件位置为exe文件同目录</p>
+ <p>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbspWeiyou xiewenjian;//类对象</p>
+  <p> &nbsp&nbsp&nbsp&nbsp&nbsp&nbspxiewenjian.微信(文字,friend,文件名);//发微信函数 </p>
+  <p> &nbsp&nbsp&nbsp&nbsp&nbsp&nbspxiewenjian.邮箱(文字,youxiang,文件名);//发邮件函数</p>
+ <p>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbspEventSetTimer(60);</p>
+ <p>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbspreturn(INIT_SUCCEEDED);</p>
+ <p> }</p>
+</body>
+</html>

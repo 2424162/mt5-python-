@@ -1,0 +1,29 @@
+<html>
+<body>
+
+<h1>mt5品种窗体截屏接口</h1>
+<h2>描述</h2>
+<P>在编写的EA文件中需要调用 写文件0708.mqh ,调用Weiyou类中函数——截屏()</P>
+
+<h2>函数</h2>
+<p>  string 截屏() //return 图片文件名</p>
+<h3>注释</h3>
+<p>不需要填任何参数，EA调用本函数后返回加载EA的品种窗体的截图文件名,如果需要通过邮件微信发送截到的图片只需要将图片文件名变量填写在相应位置</p>
+<h3>例如</h3>
+<p>#property copyright "Copyright 2019, MetaQuotes Software Corp."</p>
+<p>#property link      "https://www.mql5.com" </p>
+<p>#property version   "1.00"</p>
+<p>#include<写文件0708.mqh>  //导入mqh文件</p>
+<p>input string friend;  //定义接受人</p>
+<p>input string youxiang;//定义接收邮箱</p>
+<p>int OnInit()</p>
+<p>  {</p>
+ <p>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbspWeiyou xiewenjian;//类对象</p>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbspstring 图片= xiewenjian.截图(); //调用截图函数将图片名称赋值给变量</p>
+  <p> &nbsp&nbsp&nbsp&nbsp&nbsp&nbspxiewenjian.微信("",friend,图片); //发微信图片 </p>
+  <p> &nbsp&nbsp&nbsp&nbsp&nbsp&nbspxiewenjian.邮箱("",friend,图片);//发邮件图片</p>
+ <p>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbspreturn(INIT_SUCCEEDED);</p>
+ <p> }</p>
+
+</body>
+</html>
